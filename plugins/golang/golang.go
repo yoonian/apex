@@ -6,14 +6,14 @@ import (
 	"github.com/apex/apex/plugins/nodejs"
 )
 
-func init() {
-	function.RegisterPlugin("golang", &Plugin{})
-}
-
 const (
 	// Runtime name used by Apex
 	Runtime = "golang"
 )
+
+func init() {
+	function.RegisterPlugin(Runtime, &Plugin{})
+}
 
 // Plugin implementation.
 type Plugin struct{}
@@ -29,7 +29,7 @@ func (p *Plugin) Open(fn *function.Function) error {
 	}
 
 	fn.Shim = true
-	fn.Runtime = nodejs.Runtime
+	fn.Runtime = nodejs.Runtime43
 
 	if fn.Hooks.Clean == "" {
 		fn.Hooks.Clean = "rm -f main"
